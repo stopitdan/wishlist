@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <style>
+        * {
+            font-family: arial;
+        }
+    </style>
+
+    <h1>Welcome!</h1>
+
+    <h3>Register</h3>
+    <form action="{% url 'loginreg:register' %}" method="post">
+        {% csrf_token %}
+        <p>Name: </p><input type="text" name="name">
+        <p>Username: </p><input type="text" name="username">
+        <p>Password: </p><input type="password" name="password">
+        <p>Confirm Password: </p><input type="password" name="password_confirm">
+        <p>Date Hired: </p><input type="date" name="hire_date">
+        <input type="submit" value="Register">
+    </form>
+
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h1>Login</h1>
+    <form class="" action="/login" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Enter your username ">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Login">
+    </form>
+
+</body>
+
+</html>

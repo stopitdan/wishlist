@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wishlist</title>
+</head>
+
+<body>
+
+    <style>
+        * {
+            font-family: arial;
+        }
+    </style>
+
+    <h1>Hello, {{request.session.user.name}}!</h1>
+
+
+    <h4>Your wishlist</h4>
+    <table>
+        <thead>
+            <th>Item</th>
+            <th>Added By</th>
+            <th>Date Added</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {% for product in myproducts %}
+            <!-- ## I can only display all the trips for everybody, I can't display just the trips for the current user. -->
+            <tr>
+                <td><a href="{% url 'wishlist:show' product.id %}">{{product.name}}<a></td>
+      <td>{{product.users.name}}</td>
+      <td>{{product.created_at}}</td>
+      <td><a href="{% url 'wishlist:delete' product.id %}">Delete</a></td>
+            </tr>
+            {% endfor %} {% for product in addedproducts %}
+            <!-- ## I can only display all the trips for everybody, I can't display just the trips for the current user. -->
+            <tr>
+                <td><a href="{% url 'wishlist:show' product.id %}">{{product.name}}<a></td>
+      <td>{{product.users.name}}</td>
+      <td>{{product.created_at}}</td>
+      <td><a href="{% url 'wishlist:remove' product.id %}">Remove From My Wish List</a></td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+    <h4>Other Users' Wish List</h4>
+    <table class="u-full-width">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Added By</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            {%for product in allproducts%}
+
+            <tr>
+                <td><a href="{% url 'wishlist:show' product.id %}">{{product.name}}</a></td>
+                <td>{{product.users.name}}</td>
+                <td>{{product.created_at}}</td>
+                <td><a href="{% url 'wishlist:join' product.id %}"><i class="plus icon"></i>Add to my Wishlist</a></td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+    <a href="{% url 'wishlist:addproduct' %}">Add Item</a>
+
+
+    <form class="" action="{% url 'loginreg:logout' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+
+</body>
+
+</html>

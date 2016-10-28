@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Product</title>
+</head>
+
+<body>
+
+
+    <h1>Create a new Wish List Item</h1>
+    <form action="{% url 'wishlist:createproduct' %}" method="post">
+        {% csrf_token %}
+        <p>Item/Product: </p><input name="name" type="text">
+        <input type="submit" value="Add">
+    </form>
+
+
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <a href="{% url 'wishlist:index' %}"><input type="button" value="Home"></a>
+    <a href="{% url 'loginreg:logout' %}"><input type="button" value="Logout"></a>
+
+
+</body>
+
+</html>

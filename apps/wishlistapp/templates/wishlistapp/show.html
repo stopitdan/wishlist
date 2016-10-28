@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show</title>
+</head>
+
+<body>
+
+
+
+    <div id="wrapper">
+        {% for product in products %}
+
+        <div id="header">
+            <h1><i class="info small blue icon"></i>{{product.name}}</h1>
+        </div>
+
+        <div id="tripdetails">
+
+            <div id="list" class="ui list">
+                <div class="item">
+                    <i class="user large black icon"></i>
+                    <div class="content">
+                        Added by: {{product.users.name}}
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="calendar large icon"></i>
+                    <div class="content">
+                        Added on {{product.created_at}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="otherusers">
+
+            <div id="socialheader">
+                <h3><i id="otherusers" class="users blue icon"></i>Users who added this product/item under their wish list:</h3>
+            </div>
+            <ul id="userlist">
+                {% for user in product.join.all %}
+                <li><i class="user large black icon"></i>{{user.name}}</li>
+                {% endfor %}
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+    </div>
+    </div>
+
+    <form class="" action="{% url 'loginreg:logout' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+    <a href="{% url 'wishlist:index' %}"><input type="button" name="Home" value="Home"></a>
+
+</body>
+
+</html>
